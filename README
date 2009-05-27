@@ -1,0 +1,5 @@
+Small CMS, based on Kohana PHP framework.
+
+Inside WYSIWYG html-editor FCKeditor for content creation is used.
+
+Content is organized by tag-based taxonomy.

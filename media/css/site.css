@@ -1,0 +1,28 @@
+html {
+  background-color: #ddd;
+}
+body {
+  width: 700px;
+  margin: 2em, auto;
+  font-size: 80%;
+  font-family: Arial, Verdana, sans-serif;
+}
+h1,
+h2 {
+  font-family: Helvetica, serif;
+}
+a {
+  text-decoration: underline;
+}
+ul {
+  list-style: none;
+  padding: 1em 0;
+}
+ul li {
+  display: inline;
+  padding-right: 1em;
+}
+p {
+  margin: 0.5em, 0.5em, 0, 0;
+  padding: 0.5em;
+}
