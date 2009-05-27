@@ -40,7 +40,7 @@ $(document).ready(function () {
 				    $.ajax({
                                       dropped: element,
                                       beforeSend: function (XMLHttpRequest) {
-				        $(this.dropped).append('<img id="busy" src="/k/media/images/busy.gif" />');
+				        $(this.dropped).append('<img id="busy" src="/k/media/icons/busy.gif" />');
                                       },
 				      complete: function () {
                                         $('img#busy').remove();

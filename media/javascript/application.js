@@ -8,7 +8,7 @@ $(document).ready(function () {
 	   $.ajax({
 	     clickedLink: this,
 	     beforeSend: function (XMLHttpRequest) {
-	       $(this.clickedLink).replaceWith('<img id="busy" src="/k/media/images/busy.gif" />');
+	       $(this.clickedLink).replaceWith('<img id="busy" src="/k/media/icons/busy.gif" />');
 	     },
 	     complete: function (XMLHttpRequest, textStatus) {
 	       $('img#busy').replaceWith(this.clickedLink);
@@ -32,7 +32,7 @@ $(document).ready(function () {
     $.ajax({
       clickedButton: this,
       beforeSend: function (XMLHttpRequest) {
-	$(this.clickedButton).parent().append('<img id="busy" src="/k/media/images/busy.gif" />');
+	$(this.clickedButton).parent().append('<img id="busy" src="/k/media/icons/busy.gif" />');
       },
       complete: function (XMLHttpRequest, textStatus) {
 	$('#busy').remove();
