@@ -14,6 +14,7 @@
 	  <ul class="links">
 	    <li><?php echo html::anchor('/admin/articles/index', 'Статьи') ?></li>
 	    <li><?php echo html::anchor('/admin/tags/index', 'Метки') ?></li>
+            <li><?php echo html::anchor('/admin/images/index', 'Картинки'); ?></li>
             <li><?php echo html::anchor('/admin/settings/index', 'Настройки'); ?></li>
 	    <li><?php echo html::anchor('users/logout', 'Выход') ?></li>
 	  </ul>

@@ -66,6 +66,11 @@ class Record_Model extends ORM {
     return "admin/{$this->type}/delete/{$this->id}";
   }
 
+  public function public_url()
+  {
+    return Kohana::config('config.site_domain') . "{$this->type}/{$this->slug}";
+  }
+
   public function __get($column)
   {
     if ($column == 'tags') {
