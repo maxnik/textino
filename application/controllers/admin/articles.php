@@ -60,26 +60,33 @@ class Articles_Controller extends Admin_Controller {
   {
     $this->load_article_or_404($article_id);
 
-    $form = $this->article->as_array();
-    $errors = array();
-    foreach ($form as $key => $value) {
-      $errors[$key] = '';
-    }
-
-    if ($post = $this->input->post()) {
-      if ($this->article->validate($post, TRUE)) {
-	url::redirect($this->article->admin_show_url());
-      } else {
-	$form = arr::overwrite($form, $post->as_array());
-	$errors = arr::overwrite($errors, $post->errors('article_errors'));
+    if ((request::method() == 'post') && request::is_ajax()) {
+      $this->auto_render = FALSE;
+      $this->article->summary = $this->input->post('summary');
+      $this->article->body = $this->input->post('body');
+      $this->article->save();
+    } else {
+      $form = $this->article->as_array();
+      $errors = array();
+      foreach ($form as $key => $value) {
+	$errors[$key] = '';
       }
-    }
+      
+      if ($post = $this->input->post()) {
+	if ($this->article->validate($post, TRUE)) {
+	  url::redirect($this->article->admin_show_url());
+	} else {
+	  $form = arr::overwrite($form, $post->as_array());
+	  $errors = arr::overwrite($errors, $post->errors('article_errors'));
+	}
+      }
 
-    $this->template->title = 'Редактирование статьи: ' . $this->article->name;
-    $this->template->javascripts = View::factory('admin/articles/fckeditor');
-    $this->template->content = View::factory('admin/articles/edit')
-      ->bind('article', $this->article)
-      ->bind('builder', new Custom_form_builder($form, $errors));
+      $this->template->title = 'Редактирование статьи: ' . $this->article->name;
+      $this->template->javascripts = View::factory('admin/articles/fckeditor');
+      $this->template->content = View::factory('admin/articles/edit')
+	->bind('article', $this->article)
+	->bind('builder', new Custom_form_builder($form, $errors));
+    }
   }
 
   public function delete($article_id = NULL)

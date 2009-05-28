@@ -47,6 +47,25 @@ $(document).ready(function () {
     });
     return false;
   });
+
+  $('input#save-without-reload').click(function () {
+    var $form = $(this).parent();
+    $.ajax({
+      clickedButton: this,
+      beforeSend: function (XMLHttpRequest) {
+	$(this.clickedButton).parent().append('<img id="busy" src="/k/media/icons/busy.gif" />');
+      },
+      complete: function (XMLHttpRequest, textStatus) {
+	$('#busy').remove();
+      },
+      type: 'POST',
+      url: $form.attr('action'),
+      data: {'summary': FCKeditorAPI.GetInstance('summary').GetHTML(),
+             'body': FCKeditorAPI.GetInstance('body').GetHTML()},
+      dataType: 'json'
+    });
+    return false;
+  });
 });
 
 function replace_elements(elems) {

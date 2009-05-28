@@ -15,6 +15,8 @@ $builder->textarea_for('summary', 'Краткое описание статьи'
 $builder->textarea_for('body', 'Полный текст статьи');
 
 echo form::submit('submit', 'Сохранить');
+echo '&nbsp;';
+echo form::submit('save-without-reload', 'Сохранить текст из редакторов без перезагрузки');
 
 echo form::close();
 

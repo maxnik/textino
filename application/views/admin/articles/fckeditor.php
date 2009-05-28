@@ -1,6 +1,8 @@
 <?php
 
-print html::script(array('media/javascript/fckeditor/fckeditor'), FALSE);
+print html::script(array('media/javascript/jquery-1.3.min',
+			 'media/javascript/application',
+			 'media/javascript/fckeditor/fckeditor'), FALSE);
 
 ?>
 <script type="text/javascript">
