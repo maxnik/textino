@@ -33,7 +33,9 @@ class Record_Model extends ORM {
 
   public function save()
   {
-    $this->type = $this->record_type;
+    if (empty($this->type)) {
+      $this->type = $this->record_type;
+    }
     if ($this->id == 0) {
       $this->created = time();
     } else {
@@ -48,7 +50,18 @@ class Record_Model extends ORM {
   public function delete($id = NULL)
   {
     $this->db->delete('taggings', array('record_id' => $this->id));
+    $this->preview_delete();
     return parent::delete($id);
+  }
+
+  private function preview_delete()
+  {
+    if (! empty($this->preview)) {
+      $preview_path = Kohana::config('upload.directory') . 'records/' . $this->preview;
+      if (is_file($preview_path)) {
+	unlink($preview_path);
+      }
+    }
   }
 
   public function admin_show_url()
@@ -68,7 +81,17 @@ class Record_Model extends ORM {
 
   public function admin_preview_url()
   {
-    return url::base() . "admin/{$this->type}/preview/{$this->id}";
+    return url::base() . "admin/records/preview/{$this->id}";
+  }
+
+  public function admin_preview_delete_url()
+  {
+    return url::base() . "admin/records/preview_delete/{$this->id}";
+  }
+
+  public function preview_image_url()
+  {
+    return url::base() . "media/upload/records/{$this->preview}";
   }
 
   public function public_url($full = FALSE)
@@ -91,6 +114,14 @@ class Record_Model extends ORM {
     } else {
       return parent::__get($column);
     }
+  }
+
+  public function __set($column, $value)
+  {
+    if ($column == 'preview') {
+      $this->preview_delete();
+    }
+    return parent::__set($column, $value);
   }
 }
 

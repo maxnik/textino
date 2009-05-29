@@ -27,7 +27,22 @@ class goodies_Core {
                            "ї"=>"i", "Ї"=>"yi", "є"=>"ye", "Є"=>"ye"));
     return $st;
   }
-
+  
+  public static function respond_to_parent($script)
+  {
+    $script = strtr($script, array("\n" => ''));
+    return <<<JAVASCRIPT
+      <script type="text/javascript" charset="utf-8">  
+        var loc = document.location;
+        with(window.parent) { 
+	  setTimeout(function () { 
+	    $script
+            window.loc && loc.replace('about:blank'); 
+          }, 1);
+	}
+      </script></body></html>
+JAVASCRIPT;
+  }
 }
 
 ?>

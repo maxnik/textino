@@ -44,7 +44,8 @@ CREATE TABLE IF NOT EXISTS records (
   created INTEGER NOT NULL,
   published INTEGER,
   type TEXT NOT NULL,
-  slug TEXT NOT NULL UNIQUE
+  slug TEXT NOT NULL UNIQUE,
+  preview TEXT
 );
 
 CREATE TABLE IF NOT EXISTS taggings (

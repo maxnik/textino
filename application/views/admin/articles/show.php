@@ -27,11 +27,8 @@ View::factory('admin/articles/published')
      ->bind('article', $article)
      ->render(TRUE);
 
-echo form::open($article->admin_preview_url(), array('class' => 'admin-form', 'id' => 'preview'));
-echo form::label('preview', 'Превью картинка:');
-echo form::upload('preview');
-echo '&nbsp;';
-echo form::submit('upload-preview', 'Загрузить');
-echo form::close();
-
+View::factory('admin/records/preview')
+     ->bind('record', $article)
+     ->render(TRUE);
 ?>
+<iframe style="display: none" name="upload-frame" />

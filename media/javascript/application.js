@@ -44,7 +44,10 @@ $(document).ready(function () {
     var $form = $(this).parent();
     $.ajax({
       clickedButton: this,
-      beforeSend: append_busy,
+      beforeSend: function (XMLHttpRequest) {
+	$('.status').remove();
+	append_busy.apply(this, null);
+      },
       complete: remove_busy,
       success: function (data, textStatus) {
 	$('img#busy').replaceWith('<span class="status">Текст сохранен.</span>');
@@ -83,13 +86,12 @@ $(document).ready(function () {
   });
 
   $('input#upload-preview').live('click', function () {
-    return false;
+    append_busy.apply({clickedButton: this}, null);
   });
   
 });
 
 function append_busy(XMLHttpRequest) {
-  $('.status').remove();
   $(this.clickedButton).parent().append('<img id="busy" src="/k/media/icons/busy.gif" />');
 }
 
