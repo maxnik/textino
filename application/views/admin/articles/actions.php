@@ -6,7 +6,7 @@
 			      array('class' => 'delete',
 				    'title' => 'Вы уверены, что хотите удалить эту статью?')); ?></li>
   <li><?php echo html::anchor($article->admin_edit_url(), 'редактировать'); ?></li>
-  <li><?php echo html::anchor('#', 'предпросмотр'); ?></li>
+  <li><?php echo html::anchor($article->public_url(), 'предпросмотр'); ?></li>
 <?php endif; ?>
   <li><?php echo html::anchor('/admin/articles/create', 'создать новую статью'); ?></li>
 </ul>

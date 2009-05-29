@@ -66,9 +66,15 @@ class Record_Model extends ORM {
     return "admin/{$this->type}/delete/{$this->id}";
   }
 
-  public function public_url()
+  public function admin_preview_url()
   {
-    return Kohana::config('config.site_domain') . "{$this->type}/{$this->slug}";
+    return url::base() . "admin/{$this->type}/preview/{$this->id}";
+  }
+
+  public function public_url($full = FALSE)
+  {
+    $url = $full ? url::base() : '';
+    return $url . "{$this->type}/{$this->slug}";
   }
 
   public function __get($column)

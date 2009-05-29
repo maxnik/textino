@@ -65,6 +65,7 @@ class Articles_Controller extends Admin_Controller {
       $this->article->summary = $this->input->post('summary');
       $this->article->body = $this->input->post('body');
       $this->article->save();
+      echo json_encode(array('mmm' => ''));
     } else {
       $form = $this->article->as_array();
       $errors = array();
@@ -98,6 +99,30 @@ class Articles_Controller extends Admin_Controller {
       $response = View::factory('admin/articles/actions')
 	->bind('article', $this->article->delete());
       echo json_encode(array('actions' => $response->render(FALSE)));
+    } else {
+      print 'К этому адресу допускаются только XHR POST запросы.';
+    }
+  }
+
+  public function publish($article_id = NULL)
+  {
+    $this->auto_render = FALSE;
+    if ((request::method() == 'post') && request::is_ajax()) {
+      $this->load_article_or_404($article_id);
+      $post_params = $this->input->post();
+      if (empty($post_params)) {
+	$this->article->published = 0;
+      } else {
+	$this->article->published = mktime(0, 0, 0,
+					   (int) $post_params['month'],
+					   (int) $post_params['day'],
+					   (int) $post_params['year']);
+      }
+      $this->article->save();
+      echo json_encode(array('published' =>
+			     View::factory('admin/articles/published')
+			     ->bind('article', $this->article)
+			     ->render(FALSE)));
     } else {
       print 'К этому адресу допускаются только XHR POST запросы.';
     }

@@ -23,6 +23,11 @@ class Article_Model extends Record_Model {
 
     return parent::validate($params, $save);
   }
+
+  public function admin_publish_url()
+  {
+    return url::base() . "admin/articles/publish/{$this->id}";
+  }
 }
 
 ?>

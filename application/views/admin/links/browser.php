@@ -11,10 +11,10 @@ echo '<?xml version="1.0" encoding="utf-8" ?>';
   <CurrentFolder path="/" url="http://localhost/k/" />
   <Files>
   <?php foreach ($articles as $article): ?>
-    <File name="Статья: <?php echo $article->name; ?>" size="1" url="<?php echo $article->public_url(); ?>" />
+    <File name="Статья: <?php echo $article->name; ?>" size="1" url="<?php echo $article->public_url(TRUE); ?>" />
   <?php endforeach; ?>
   <?php foreach ($tags as $tag): ?>
-    <File name="Метка: <?php echo $tag->name; ?>" size="1" url="<?php echo $tag->public_url(); ?>" />
+    <File name="Метка: <?php echo $tag->name; ?>" size="1" url="<?php echo $tag->public_url(TRUE); ?>" />
   <?php endforeach; ?>
   </Files>
 </Connector>

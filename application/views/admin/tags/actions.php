@@ -6,7 +6,7 @@
 			        array('class' => 'delete',
 				      'title' => 'Вы уверены, что хотите удалить эту метку?')); ?></li>
     <li><?php echo html::anchor($tag->admin_edit_url(), 'редактировать'); ?></li>
-    <li><?php echo html::anchor('#', 'предпросмотр'); ?></li>
+    <li><?php echo html::anchor($tag->public_url(), 'предпросмотр'); ?></li>
   <?php endif; ?>
   <li><?php echo html::anchor('/admin/tags/create', 'создать новую метку'); ?></li>
 </ul>

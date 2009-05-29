@@ -1,6 +1,6 @@
 <h1>Значения по умолчанию</h1>
 
-<span class="status"><?php if (isset($status)) { echo $status; } ?></p>
+<span class="status"><?php if (isset($status)) { echo $status; } ?></span>
 
 <?php
 
