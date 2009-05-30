@@ -21,6 +21,12 @@ class Tag_Model extends Record_Model {
     
     return parent::validate($params, $save);
   }
+
+  public function save()
+  {
+    $this->published = time();
+    return parent::save();
+  }
   
   public function delete($id = NULL)
   {

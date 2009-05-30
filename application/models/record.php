@@ -22,6 +22,11 @@ class Record_Model extends ORM {
     }
   }
 
+  public function already_published()
+  {
+    return $this->where(array('published >' => 0, 'published < ' => time()))->find_all();
+  }
+
   public function find_all($limit = NULL, $offset = NULL)
   {
     if (isset($this->record_type)) {
