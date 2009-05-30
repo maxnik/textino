@@ -21,7 +21,12 @@ field_or_empty('Заголовок окна страницы с меткой (ti
 field_or_empty('Описание страницы с меткой для поисковиков (description)', $tag->description);
 field_or_empty('Ключевые слова страницы с меткой для поисковиков (keywords)', $tag->keywords);
 
+View::factory('admin/records/preview')
+     ->bind('record', $tag)
+     ->render(TRUE);
 ?>
+
+
 <?php if ($records->count() == 0): ?>
   <p>Нет ни одной отмеченной записи.</p>
 <?php else: ?>
@@ -33,5 +38,4 @@ field_or_empty('Ключевые слова страницы с меткой д�
   <?php endforeach; ?>
   </ul>
 <?php endif; ?>
-
-
+<iframe style="display: none" name="upload-frame" />
