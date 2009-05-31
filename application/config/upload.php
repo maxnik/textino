@@ -4,7 +4,7 @@
  *
  * This path is relative to your index file. Absolute paths are also supported.
  */
-$config['directory'] = DOCROOT.'media/upload/';
+$config['directory'] = DOCROOT.'application/media/upload/';
 
 /**
  * Enable or disable directory creation.

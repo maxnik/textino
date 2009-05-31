@@ -157,7 +157,6 @@ class Session_Core {
 		);
 
 		// Start the session!
-		session_cache_limiter('private_no_expire');
 		session_start();
 
 		// Put session_id in the session variable
