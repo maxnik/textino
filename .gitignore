@@ -1,2 +1,2 @@
-application/logs/*
-media/upload/*
+application/logs/*.log.php
+
