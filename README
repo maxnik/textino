@@ -3,3 +3,16 @@ Small CMS, based on Kohana PHP framework.
 Inside WYSIWYG html-editor FCKeditor for content creation is used.
 
 Content is organized by tag-based taxonomy.
+
+Change path in these files for CMS to work:
+- application/media/javascript/application.js replace path to ajax request animation "/k/media/icons/busy.gif" to path, 
+  relative to your server name in all places in this file;
+- application/media/javascript/fckeditor/fckconfig.js replace all addresses like "/k/" to valid addresses, relative to
+  your server name;
+- application/controllers/media.php change path "/var/www/html/k/application/" to directory, where 'media' directory 
+  is placed;
+- application/views/admin/tags/javascripts.php replace path to ajax request animation "/k/media/icons/busy.gif" and 
+  path to action for ajax drag-n-drop records sorting "/k/admin/taggings/edit/....."
+
+In all above files path "/k/..." means "http://your-server/k/...." url. In most typical installations replace all such
+urls with "http://you-server/....".
