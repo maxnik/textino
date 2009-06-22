@@ -5,6 +5,8 @@ Inside WYSIWYG html-editor FCKeditor for content creation is used.
 Content is organized by tag-based taxonomy.
 
 Change path in these files for CMS to work:
+- change RewriteBase in .htaccess;
+- change all relevant urls and paths in application/config/*.php files;
 - application/media/javascript/application.js replace path to ajax request animation "/k/media/icons/busy.gif" to path, 
   relative to your server name in all places in this file;
 - application/media/javascript/fckeditor/fckconfig.js replace all addresses like "/k/" to valid addresses, relative to
