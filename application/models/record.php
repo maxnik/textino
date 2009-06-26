@@ -30,10 +30,19 @@ class Record_Model extends ORM {
   public function find_all($limit = NULL, $offset = NULL)
   {
     if (isset($this->record_type)) {
-      $this->db->where(array('type' => $this->record_type));
+      $this->db->where(array("type" => $this->record_type));
     }
 
     return parent::find_all($limit, $offset);
+  }
+
+  public function find($id = NULL)
+  {
+    if (isset($this->record_type)) {
+      $this->db->where(array("type" => $this->record_type));
+    }
+
+    return parent::find($id);
   }
 
   public function save()
@@ -128,6 +137,8 @@ class Record_Model extends ORM {
     }
     return parent::__set($column, $value);
   }
+
+  const per_page = 10;
 }
 
 ?>

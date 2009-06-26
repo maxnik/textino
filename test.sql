@@ -42,10 +42,11 @@ CREATE TABLE IF NOT EXISTS records (
   num_views INTEGER NOT NULL DEFAULT 0,
   author_id INTEGER NOT NULL,
   created INTEGER NOT NULL,
-  published INTEGER,
+  published INTEGER NOT NULL DEFAULT 0,
   type TEXT NOT NULL,
   slug TEXT NOT NULL UNIQUE,
-  preview TEXT
+  preview TEXT,
+  commenting INTEGER NOT NULL DEFAULT 0
 );
 
 CREATE TABLE IF NOT EXISTS taggings (
@@ -68,3 +69,12 @@ INSERT INTO initial_values (id, name) VALUES (4, 'tag_title');
 INSERT INTO initial_values (id, name) VALUES (5, 'tag_description');
 INSERT INTO initial_values (id, name) VALUES (6, 'tag_keywords');
 
+CREATE TABLE IF NOT EXISTS comments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  author TEXT NOT NULL,
+  url TEXT,
+  body TEXT NOT NULL,
+  article_id INTEGER NOT NULL,
+  created INTEGER NOT NULL,
+  published INTEGER NOT NULL DEFAULT 0
+);

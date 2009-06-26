@@ -10,7 +10,7 @@ class Custom_form_builder {
 
   public function input_for($field, $label)
   {
-    echo '<div>';
+    echo '<div class="label-above">';
     echo form::label($field, $label . ':');
     echo form::input($field, $this->form[$field], ' class="text-field"');
     if (! empty($this->errors[$field])) {
@@ -21,7 +21,7 @@ class Custom_form_builder {
 
   public function textarea_for($field, $label)
   {
-    echo '<div>';
+    echo '<div class="label-above">';
     echo form::label($field, $label . ':');
     echo form::textarea($field, $this->form[$field]);
     if (! empty($this->errors[$field])) {
@@ -32,7 +32,7 @@ class Custom_form_builder {
 
   public function password_for($field, $label)
   {
-    echo '<div>';
+    echo '<div class="label-above">';
     echo form::label($field, $label . ':');
     echo form::password($field, '', ' class="text-field"');
     if (! empty($this->errors[$field])) {

@@ -65,6 +65,7 @@ H2 {
   padding-top: 0.5em;
 }
 
+A.put,
 A.delete {
   text-decoration: none;
   border-bottom-width: 1px;

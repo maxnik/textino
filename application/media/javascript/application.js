@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  var post_methods = ['delete'];
+  var post_methods = ['delete', 'put'];
   for (var index in post_methods) {
     (function (method) {
        

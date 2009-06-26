@@ -30,5 +30,9 @@ View::factory('admin/articles/published')
 View::factory('admin/records/preview')
      ->bind('record', $article)
      ->render(TRUE);
+
+View::factory('admin/articles/commenting')
+     ->bind('article', $article)
+     ->render(TRUE);
 ?>
-<iframe style="display: none" name="upload-frame" />
+

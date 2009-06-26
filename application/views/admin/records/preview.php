@@ -22,3 +22,4 @@ echo form::submit('upload-preview', 'Загрузить');
 echo '</div>';
 echo form::close(); 
 ?>
+<iframe style="display: none" name="upload-frame"></iframe>

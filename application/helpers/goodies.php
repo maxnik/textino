@@ -43,6 +43,62 @@ class goodies_Core {
       </script></body></html>
 JAVASCRIPT;
   }
+
+  public static function items($num, $one, $few, $many)
+  {
+    if (($num % 10 == 1) &&
+	($num % 100 != 11)) {
+      return $one;
+    } elseif (($num % 10 >= 2) && 
+	      ($num % 10 <= 4) && 
+	      (($num % 100 < 10) || ($num % 100 >= 20))) {
+      return $few;
+    } else {
+      return $many;
+    }
+  }
+  
+  public static function time_from_now_in_words($timestamp_in_past)
+  {
+    $minutes = round((time() - $timestamp_in_past) / 60);
+    $in_words = '';
+    if ($minutes < 1) {
+      $in_words = 'меньше<br />минуты';
+    } elseif ($minutes >= 1 && $minutes <= 45) {
+      $in_words = "$minutes ". goodies::items($minutes, 'минуту', 'минуты', 'минут');
+    } elseif ($minutes > 45 && $minutes <= 90) {
+      $in_words = 'около<br />часа';
+    } elseif ($minutes > 90 && $minutes <= 1440) {
+      $hours = round($minutes / 60);
+      $in_words = "около<br />$hours " . goodies::items($hours, 'часа', 'часов', 'часов');
+    } elseif ($minutes > 1440 && $minutes <= 2880) {
+      $in_words = '1 день';
+    } else {
+      $days = round($minutes / 1440);
+      $in_words = "$days " . goodies::items($days, 'день', 'дня', 'дней');
+    }
+    return $in_words;
+  }
+
+  public static function value_of_interval($a, $b)
+  {
+    return ($a == 0 || $b == 0) ? abs($a - $b) : round(($a + $b) / 2);
+  }
+
+  public static function empty_when_zero($value)
+  {
+    return ($value == 0) ? '' : $value;
+  }
+
+  public static function topic_pages_links($topic)
+  {
+    $fragment = '';
+    $pages = ceil($topic->answers / Topic_Model::per_page);
+    for ($page = 2; $page <= $pages; $page++) {
+      $fragment .= html::anchor($topic->show_url() . "?page={$page}", $page, array('class' => 'topic_pages')) . ' ';
+    }
+    return $fragment;
+  }
 }
 
 ?>

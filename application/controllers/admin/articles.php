@@ -128,6 +128,24 @@ class Articles_Controller extends Admin_Controller {
     }
   }
 
+  public function commenting($article_id = NULL)
+  {
+    $this->auto_render = FALSE;
+    if ((request::method() == 'post') && request::is_ajax()) {
+      $this->load_article_or_404($article_id);
+
+      $this->article->commenting = ($this->article->commenting) ? 0 : 1; // Change commenting setting
+      $this->article->save();
+
+      echo json_encode(array('commenting' =>
+			     View::factory('admin/articles/commenting')
+			     ->bind('article', $this->article)
+			     ->render(FALSE)));       
+    } else {
+      print 'К этому адресу допускаются только XHR POST запросы.';
+    }
+  }
+
   private function load_article_or_404($article_id = NULL)
   {
     $this->article = ORM::factory('article', $article_id);
