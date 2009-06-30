@@ -45,10 +45,23 @@ class Articles_Controller extends Admin_Controller {
   {
     $this->load_article_or_404($article_id);
 
+    $conditions = array('article_id' => $this->article->id);
+    $total_comments = Database::instance()->where($conditions)->count_records('comments');
+    $safepag = new Safe_pagination((int) $this->input->get('page', 1),
+				   Comment_Model::per_page,
+				   $total_comments);
+
+    $comments = ORM::factory('comment')
+      ->where($conditions)
+      ->limit($safepag->per_page, $safepag->offset)
+      ->find_all();
+
     $this->template->title = 'Статья: ' . $this->article->name;
     $this->template->javascripts = View::factory('admin/taggings/javascripts');
     $this->template->content = View::factory('admin/articles/show')
-      ->bind('article', $this->article);
+      ->bind('article', $this->article)
+      ->bind('comments', $comments)
+      ->bind('safepag', $safepag);
 
     $this->template->tagging = View::factory('admin/taggings/form')
       ->set('record_id', $this->article->id)

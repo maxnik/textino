@@ -54,6 +54,12 @@ class Article_Model extends Record_Model {
 		    'records.published <' => time()))
       ->count_records('records');
   }
+
+  public function delete()
+  {
+    $this->db->delete('comments', array('article_id' => $this->id));
+    return parent::delete();
+  }
 }
 
 ?>

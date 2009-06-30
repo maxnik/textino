@@ -30,12 +30,12 @@ h1 {
 }
 
 #left {
-  width: 17em;
+  width: 13em;
   float: left;
 }
 
 #right {
-  margin-left: 17em;
+  margin-left: 13em;
 }
 
 #left UL.links {
@@ -76,6 +76,7 @@ A.tag-link {
   color: #a020f0;
 }
 
+.actions LI,
 UL#actions LI {
   display: inline;
   margin-right: 1em;
@@ -98,4 +99,8 @@ OL#records LI {
   background-color: yellow;
 }
 
-
+UL.admin-comments LI.comment {
+  border: 1px solid #000;
+  margin-bottom: 0.5em;
+  padding-bottom: 0.5em;
+}

@@ -1,5 +1,5 @@
 <?php 
-print form::open('/admin/taggings/create', array('class' => 'tagging-form'));
+print form::open('/admin/taggings/create', array('class' => 'tagging-form admin-form'));
 
 print form::hidden(array('record_id' => $record_id));
 

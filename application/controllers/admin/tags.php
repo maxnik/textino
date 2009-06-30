@@ -28,7 +28,10 @@ class Tags_Controller extends Admin_Controller {
     if ($post = $this->input->post()) {
 
       if ($tag->validate($post, TRUE)) {
-	url::redirect('/admin/tags/index');
+	$tag = ORM::factory('tag')
+	  ->orderby('created', 'desc')
+	  ->find();
+	url::redirect($tag->admin_show_url());
       } else {
 	$form = arr::overwrite($form, $post->as_array());
 	$errors = arr::overwrite($errors, $post->errors('tag_errors'));

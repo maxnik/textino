@@ -63,8 +63,12 @@ UL.blog-posts LI {
   margin-bottom: 2em;
 }
 
+SPAN.comments-count,
 SPAN.post-published {
   color: #f00;
+}
+SPAN.comments-count {
+  float: right;
 }
 
 .post OL {

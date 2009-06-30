@@ -36,3 +36,11 @@ View::factory('admin/articles/commenting')
      ->render(TRUE);
 ?>
 
+<h2>Комментарии</h2>
+
+<?php if ($comments->count() == 0): ?>
+  <p>В настоящее время читатели блога еще не оставили комментариев к этой статье.</p>
+<?php else: ?>
+  <?php View::factory('admin/comments/list')->bind('comments', $comments)->bind('safepag', $safepag)->render(TRUE); ?>
+<?php endif; ?>
+

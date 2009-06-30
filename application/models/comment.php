@@ -6,10 +6,12 @@ class Comment_Model extends ORM {
 
   protected $sorting = array('created' => 'asc');
 
-  public function __construct()
+  public function __construct($id = NULL)
   {
-    parent::__construct();
-    $this->url = 'http://';
+    parent::__construct($id);
+    if ($this->id == 0) {
+      $this->url = 'http://';
+    }
   }
   
   public function validate(array & $array, $save = FALSE)
@@ -21,6 +23,7 @@ class Comment_Model extends ORM {
       ->add_rules('author', 'required', 'length[1, 30]')
       ->add_rules('url', 'valid::url')
       ->add_rules('body', 'required', 'length[10,1000]');
+
     return parent::validate($array, $save);
   }
 
@@ -48,6 +51,25 @@ class Comment_Model extends ORM {
     $this->db->where("{$this->table_name}.published = 0");
     return $this->find_all();
   }
+
+  public function admin_publish_url()
+  {
+    return "/admin/comments/publish/{$this->id}";
+  }
+
+  public function admin_delete_url()
+  {
+    return "/admin/comments/delete/{$this->id}";
+  }
+
+  public function count_all_unpublished()
+  {
+    return $this->db
+      ->where(array("{$this->table_name}.published =" => 0))
+      ->count_records($this->table_name);
+  }
+
+  const per_page = 10;
 }
 
 ?>
