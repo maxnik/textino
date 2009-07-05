@@ -296,7 +296,7 @@ class Pdosqlite_Result extends Database_Result {
 	 */
 	public function __construct($result, $link, $object = TRUE, $sql)
 	{
-		if (is_object($result) OR $result = $link->prepare($sql))
+	        if (is_object($result) OR $result = $link->prepare($sql))
 		{
 			// run the query
 			try

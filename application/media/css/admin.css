@@ -104,3 +104,14 @@ UL.admin-comments LI.comment {
   margin-bottom: 0.5em;
   padding-bottom: 0.5em;
 }
+
+.tagging-form SELECT#tag_id {
+  width: 13em;
+}
+
+.articles TD {
+  padding: 0.5em;
+}
+.articles TD.tags {
+  width: 20em;
+}

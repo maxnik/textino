@@ -11,8 +11,7 @@ class Articles_Controller extends Site_Controller {
 
     $articles = ORM::factory('article')
       ->select('records.*, COUNT(comments.id) AS comments_count')
-      ->join('comments', 'comments.article_id = records.id', '', 'LEFT')
-      ->where('comments.published != 0')
+      ->join('comments', 'comments.article_id = records.id AND comments.published != 0', '', 'LEFT')
       ->groupby('records.id')
       ->orderby('records.published', 'desc')
       ->limit($safepag->per_page, $safepag->offset)

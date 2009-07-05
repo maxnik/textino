@@ -12,10 +12,25 @@
       <div class="container">
         <div id="top"><?php echo html::anchor('/', 'Название блога большими буквами'); ?></div>
         <div id="menu">
+          Разделы
 	  <ul class="categories">
-	    <li><?php echo html::anchor('#', 'Одна категория постов') ?></li>
-	    <li><?php echo html::anchor('#', 'Другая категория постов') ?></li>
-	    <li><?php echo html::anchor('#', 'Еще одна категория постов') ?></li>
+	  <?php foreach ($categories as $category): ?>
+	    <li><?php echo html::anchor($category->public_url(), $category->name) ?></li>
+	  <?php endforeach; ?>
+	  </ul>
+          Облако тегов
+	  <p>
+	  <?php foreach ($tags as $tag): ?>
+	    <?php $font_size =  number_format(0.6 + $tag->total_articles * 0.2, 1, '.', ''); ?>
+	    <?php echo html::anchor($tag->public_url(), "{$tag->name}",
+				    array('style' => "font-size: {$font_size}em;")) ?>
+	  <?php endforeach; ?>
+	  </p>
+          Архив
+	  <ul class="months">
+	  <?php foreach ($months as $month): ?>
+	    <li><?php echo html::anchor($month->public_url(), $month->name) ?></li>
+	  <?php endforeach; ?>
 	  </ul>
 	</div>
 	<div id="main">

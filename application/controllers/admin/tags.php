@@ -5,7 +5,12 @@ class Tags_Controller extends Admin_Controller {
   public function index()
   {
     $this->template->title = 'Метки';
-    $tags = ORM::factory('tag')->find_all();
+    $tags = ORM::factory('tag')
+      ->select('records.*, tags.name as parent_tag')
+      ->join('taggings', 'taggings.record_id = records.id', '', 'LEFT')
+      ->join('records as tags', 'tags.id = taggings.tag_id', '', 'LEFT')
+      ->orderby('records.created', 'asc')
+      ->find_all();
     $this->template->content = View::factory('admin/tags/index')
       ->bind('tags', $tags);
   }
@@ -56,6 +61,7 @@ class Tags_Controller extends Admin_Controller {
 
     $all_tags_except_this = ORM::factory('tag')
       ->where(array('id != ' => $this->tag->id))
+      ->orderby('created', 'asc')
       ->find_all();
     $this->template->tagging = View::factory('admin/taggings/form')
       ->set('record_id', $this->tag->id)

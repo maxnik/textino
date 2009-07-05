@@ -5,9 +5,37 @@ class Articles_Controller extends Admin_Controller {
   public function index()
   {
     $this->template->title = 'Статьи';
-    $articles = ORM::factory('article')->find_all();
+    $articles = ORM::factory('article')
+      ->select('id, type, name, published, created')
+      ->orderby('published', 'desc')
+      ->find_all()
+      ->as_array();
+
+    $article_ids = array();
+    foreach ($articles as $article) { $article_ids[] = $article->id; }
+    $article_ids_list = implode(',', $article_ids);
+
+    $taggings = ORM::factory('tagging')
+      ->select('record_id', 'tag_id')
+      ->where("record_id IN ($article_ids_list)")
+      ->find_all();
+
+    $article_tags = array();
+    foreach ($taggings as $tagging) {
+      if (array_key_exists($tagging->record_id, $article_tags)) {
+	$article_tags[$tagging->record_id][] = $tagging->tag_id;
+      } else {
+	$article_tags[$tagging->record_id] = array($tagging->tag_id);
+      }
+    }
+
+    $tags = ORM::factory('tag')
+      ->select_list('id', 'name');
+
     $this->template->content = View::factory('admin/articles/index')
-      ->bind('articles', $articles);
+      ->bind('articles', $articles)
+      ->bind('article_tags', $article_tags)
+      ->bind('tags', $tags);
   }
 
   public function create()
@@ -65,7 +93,7 @@ class Articles_Controller extends Admin_Controller {
 
     $this->template->tagging = View::factory('admin/taggings/form')
       ->set('record_id', $this->article->id)
-      ->bind('all_tags', ORM::factory('tag')->find_all())
+      ->bind('all_tags', ORM::factory('tag')->orderby('created', 'asc')->find_all())
       ->bind('assigned_tags', $this->article->tags);
   }
 

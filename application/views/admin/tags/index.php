@@ -6,12 +6,12 @@
   <p>На сайт не добавлена еще ни одна метка.</p>
 <?php else: ?>
   <h2>Список меток на сайте</h2>
-  <ul class="tags">
-    <?php foreach ($tags as $tag): ?>
-      <li>
-        <?php echo html::anchor($tag->admin_show_url(), $tag->name); ?>
-        (<?php echo html::anchor($tag->admin_edit_url(), 'редактировать') ?>)
-      </li>
-    <?php endforeach; ?>
-  </ul>
+  <table border="0" class="tags">
+  <?php foreach ($tags as $tag): ?>
+    <tr>
+      <td><?php echo html::anchor($tag->admin_show_url(), $tag->name); ?></td>
+      <td><?php echo $tag->parent_tag; ?></td>
+    </tr>
+  <?php endforeach; ?>
+  </table>
 <?php endif; ?>
