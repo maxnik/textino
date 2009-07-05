@@ -61,6 +61,7 @@ A {
 UL.blog-posts LI {
   border: 1px dashed black;
   margin-bottom: 2em;
+  clear: left;
 }
 
 SPAN.comments-count,

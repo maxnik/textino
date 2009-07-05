@@ -4,6 +4,10 @@
 <?php endif; ?>
 
 <h1><?php echo $article->name; ?></h1>
+<span class="post-published">
+  опубликовано <?php echo ereg_replace('<br />', ' ',
+                                       goodies::time_from_now_in_words($article->published)); ?> назад
+</span>
 
 <div class="post">
   <?php echo $article->body; ?>

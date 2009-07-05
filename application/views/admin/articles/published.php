@@ -32,7 +32,7 @@ echo form::open($article->admin_publish_url(), array('class' => 'admin-form', 'i
 echo form::label('day', 'Дата публикации:');
 echo form::dropdown('day', $days, $day);
 echo form::dropdown('month', $months, $month);
-echo form::dropdown('year', array(2009 => 2009, 2010 => 2010, 2011 => 2011), $year);
+echo form::dropdown('year', array(2008 => 2008, 2009 => 2009, 2010 => 2010, 2011 => 2011), $year);
 echo '&nbsp;';
 echo form::submit('publish-article', 'Сохранить');
 echo '&nbsp;';
