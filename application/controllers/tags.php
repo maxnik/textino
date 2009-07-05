@@ -40,17 +40,24 @@ class Tags_Controller extends Site_Controller {
       throw new Kohana_404_Exception;
     }    
 
-    switch ($parent_tag->name) {
-    case 'Список разделов':
-      $this->template->title = "Раздел \"{$tag->name}\"";
-      break;
-    case 'Список тегов':
-      $this->template->title = "Записи с тегом \"{$tag->name}\"";
-      break;
-    case 'Список месяцев':
-      $this->template->title = "Архив записей: {$tag->name}";
-      break;      
-    } 
+    if ($tag->title) {
+      $this->template->title = $tag->title;
+    } else {
+      switch ($parent_tag->name) {
+      case 'Список разделов':
+	$this->template->title = "Раздел \"{$tag->name}\"";
+	break;
+      case 'Список тегов':
+	$this->template->title = "Записи с тегом \"{$tag->name}\"";
+	break;
+      case 'Список месяцев':
+	$this->template->title = "Архив записей: {$tag->name}";
+	break;      
+      }
+    }
+    if ($tag->description) {
+      $this->template->description = $tag->description;
+    }
     $this->template->content = View::factory('tags/show')
       ->bind('tag', $tag)
       ->bind('articles', $articles)

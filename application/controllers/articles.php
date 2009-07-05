@@ -18,6 +18,7 @@ class Articles_Controller extends Site_Controller {
       ->find_all_published();
 
     $this->template->title = 'Название блога такое-то';
+    $this->template->description = 'Сотрудник автосалона решил завести свой блог. Буду писать про новинки автопрома.';
     $this->template->content = View::factory('articles/index')
       ->bind('articles', $articles)
       ->bind('safepag', $safepag);
@@ -37,7 +38,10 @@ class Articles_Controller extends Site_Controller {
       $builder = new Custom_form_builder($form, array_fill_keys(array_keys($form), NULL));
     }
 
-    $this->template->title = "Название блога: {$article->name}";
+    $this->template->title = ($article->title) ? $article->title : "Название блога: {$article->name}";
+    if ($article->description) {
+      $this->template->description = $article->description;
+    }
     $this->template->content = View::factory('articles/show')
       ->bind('article', $article)
       ->bind('comments', $comments)
