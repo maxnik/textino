@@ -18,9 +18,7 @@ class Tags_Controller extends Site_Controller {
       ->join('taggings', 'taggings.record_id = records.id', '', 'LEFT')
       ->where(array('tag_id' => $tag->id))
       ->count_all_published();
-    $safepag = new Safe_pagination((int) $this->input->get('page', 1),
-				   Article_Model::per_page,
-				   $total_articles);
+    $safepag = new Safe_pagination((int) $this->input->get('page', 1), 5, $total_articles);
 
     $articles = ORM::factory('article')
       ->select('records.*, COUNT(comments.id) AS comments_count')

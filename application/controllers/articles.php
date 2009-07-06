@@ -5,9 +5,7 @@ class Articles_Controller extends Site_Controller {
   public function index()
   {
     $total_articles = ORM::factory('article')->count_all_published();
-    $safepag = new Safe_pagination((int) $this->input->get('page', 1),
-				   Article_Model::per_page,
-				   $total_articles);
+    $safepag = new Safe_pagination((int) $this->input->get('page', 1), 5, $total_articles);
 
     $articles = ORM::factory('article')
       ->select('records.*, COUNT(comments.id) AS comments_count')

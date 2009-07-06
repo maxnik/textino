@@ -3,6 +3,9 @@
   <span class="status"><?php echo $status; ?></span>
 <?php endif; ?>
 
+<?php if ($article->preview): ?>
+  <img align="left" src="<?php echo url::base() . "media/upload/records/{$article->preview}"; ?>" />
+<?php endif; ?>
 <h1><?php echo $article->name; ?></h1>
 <span class="post-published">
   опубликовано <?php echo ereg_replace('<br />', ' ',
